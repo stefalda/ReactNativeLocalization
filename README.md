@@ -23,42 +23,48 @@ In this way I can keep the strings in the same file of the React View in a simil
      a language key (i.e. en, it, fr..) and then a list of key-value pairs with
      the needed localized strings
  
-     var LocalizedStrings = require('./LocalizedStrings');
- 
-     var strings = new  LocalizedStrings({
-        en:{
-          how:"How do you want your egg today?",
-          boiledEgg:"Boiled egg",
-          softBoiledEgg:"Soft-boiled egg",
-          choice:"How to choose the egg"
-        },
-        it:{
-          how:"Come vuoi il tuo uovo oggi?",
-          boiledEgg:"Uovo sodo",
-          softBoiledEgg:"Uovo alla coque",
-          choice:"Come scegliere l'uovo"
-        }
-     });
+ ```javascript
+ var LocalizedStrings = require('./LocalizedStrings');
+
+ var strings = new  LocalizedStrings({
+    en:{
+      how:"How do you want your egg today?",
+      boiledEgg:"Boiled egg",
+      softBoiledEgg:"Soft-boiled egg",
+      choice:"How to choose the egg"
+    },
+    it:{
+      how:"Come vuoi il tuo uovo oggi?",
+      boiledEgg:"Uovo sodo",
+      softBoiledEgg:"Uovo alla coque",
+      choice:"Come scegliere l'uovo"
+    }
+ });
+ ```
   
   3) In the constructor method call the load() function of the strings object
      with a callback to be called whenever the current language has been
      returned by the OS (if this method wasn't asynchronous we could avoid the
      callback and just do everything in the constructor)
- 
-         constructor(props) {
-           super(props);
-           strings.load().then(()=>{
-            this.setState();
-            console.log("Strings loaded");
-          });
-        }
+
+```javascript
+ constructor(props) {
+   super(props);
+   strings.load().then(()=>{
+    this.setState();
+    console.log("Strings loaded");
+  });
+}
+```
  
   4) Use the strings object directly in the render method accessing the key
      of the localized string
- 
-        <Text style={styles.title}>
-              {strings.how}
-        </Text>
+
+```javascript
+<Text style={styles.title}>
+  {strings.how}
+</Text>
+```
 
 ###Improvements
 I'd really have preferred to avoid the call to the load() method with the callback but the native method call wasn't resolved at initialization time, so I had to find a way to intercept the moment when the interface language value is available and force a rendering of the view.
