@@ -42,7 +42,7 @@
  */
 'use strict';
 
-var Q = require("q");
+//var Q = require("q");
 var localization = require('NativeModules').ReactLocalization;
 var interfaceLanguage = localization.language;
 
@@ -72,12 +72,12 @@ class LocalizedStrings{
         this.language = bestLanguage;
         //Associate the language object to the this object
         if (this.props[bestLanguage]){
-          console.log("There are strings for the language:"+language);
+          //console.log("There are strings for the language:"+language);
           var localizedStrings = this.props[language];
           for (var key in localizedStrings){
-            console.log("Checking property:"+key);
+            //console.log("Checking property:"+key);
             if (localizedStrings.hasOwnProperty(key)) {
-              console.log("Associating property:"+key);
+              //console.log("Associating property:"+key);
               this[key] = localizedStrings[key];
             }
           }

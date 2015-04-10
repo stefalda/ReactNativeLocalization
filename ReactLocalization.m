@@ -51,6 +51,6 @@
  */
 - (NSDictionary *)constantsToExport
 {
-    return @{ @"language": [self getCurrentLanguage], @"prova":@"prova"};
+    return @{ @"language": [self getCurrentLanguage]};
 }
 @end
