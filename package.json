@@ -1,0 +1,29 @@
+{
+  "name": "react-native-localization",
+  "version": "0.1.1",
+  "description": "Simple module to localize the ReactNative interface",
+  "main": "LocalizedStrings.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefalda/ReactNativeLocalization.git"
+  },
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "localization",
+    "internationalization"
+  ],
+  "dependencies": {
+    "react-native": "^0.3.1"
+  },
+  "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefalda/ReactNativeLocalization/issues"
+  },
+  "homepage": "https://github.com/stefalda/ReactNativeLocalization"
+}
