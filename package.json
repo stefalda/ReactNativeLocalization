@@ -18,7 +18,7 @@
     "internationalization"
   ],
   "dependencies": {
-    "react-native": "^0.3.1"
+    "react-native": "^0.3.10"
   },
   "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
   "license": "MIT",
