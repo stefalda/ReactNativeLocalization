@@ -2,16 +2,18 @@
 
 Class to localize the ReactNative interface
 
-###Why
+###What
 I just needed a dead simple way to internationalize my first React Native app.
 
-At the beginning I thought about accessing the native iOS internationalization API (NSLocalizedString macro) but then I've opted for a solution that seems, at least to me, more in the spirit of React (I feared, too, I don't know if rightfully, that avoiding crossing the bridge from Javascript to Objective-C is better, performance wise).
+At the beginning I thought I'd expose the native iOS internationalization API (NSLocalizedString macro) to Native Script, but then I've opted for a solution that seems, at least to me, more in the spirit of React (and I hope better performance wise).
 
-In this way I can keep the strings in the same file of the React View in a similar way of how Styles are implemented
+In this implementation we can keep the localized strings in the same file of the React View in a similar way of how Styles are implemented (I don't deny that this approach could lead to some duplications in the translated strings, but it could be feasable to create a commonjs module to use as common source of the strings, requiring it in the different views).
 
-###What
+###How it works
   The Javascript library uses a native library (ReactLocalization) to get the current interface language,
-  then it displays the correct language strings or the default language (the first one if a match is not found).
+  then it loads and displays the strings matching the current interface locale or the default language (the first one if a match is not found) if a specific localization can't be found.
+
+  It's possible to force a language different from the interface one.
 
 ###How to use:
 
