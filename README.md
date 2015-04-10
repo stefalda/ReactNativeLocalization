@@ -31,7 +31,8 @@ In this implementation we can keep the localized strings in the same file of the
      the needed localized strings
 
  ```javascript
- var LocalizedStrings = require('./LocalizedStrings');
+ var LocalizedStrings = require('./node_modules/react-native-localization/LocalizedStrings');
+;
 
  var strings = new  LocalizedStrings({
     en:{
