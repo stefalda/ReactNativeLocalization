@@ -12,17 +12,19 @@ In this way I can keep the strings in the same file of the React View in a simil
 ###What
   The Javascript library uses a native library (ReactLocalization) to get the current interface language,
   then it displays the correct language strings or the default language (the first one if a match is not found).
- 
+
 ###How to use:
-  
-  1) include the ReactLocalocalization.m and ReactLocalocalization.h in your
-     XCode project
-  
+
+  1) include in your XCode project
+
+  	 * ReactLocalization.h
+  	 * ReactLocalization.m
+
   2) in the React class that you want to localize require the library and define
      the strings object passing to the constructor a simple object containing
      a language key (i.e. en, it, fr..) and then a list of key-value pairs with
      the needed localized strings
- 
+
  ```javascript
  var LocalizedStrings = require('./LocalizedStrings');
 
@@ -41,23 +43,8 @@ In this way I can keep the strings in the same file of the React View in a simil
     }
  });
  ```
-  
-  3) In the constructor method call the load() function of the strings object
-     with a callback to be called whenever the current language has been
-     returned by the OS (if this method wasn't asynchronous we could avoid the
-     callback and just do everything in the constructor)
 
-```javascript
- constructor(props) {
-   super(props);
-   strings.load().then(()=>{
-    this.setState();
-    console.log("Strings loaded");
-  });
-}
-```
- 
-  4) Use the strings object directly in the render method accessing the key
+  3) Use the strings object directly in the render method accessing the key
      of the localized string
 
 ```javascript
@@ -66,11 +53,19 @@ In this way I can keep the strings in the same file of the React View in a simil
 </Text>
 ```
 
-###Improvements
-I'd really have preferred to avoid the call to the load() method with the callback but the native method call wasn't resolved at initialization time, so I had to find a way to intercept the moment when the interface language value is available and force a rendering of the view.
+###Other methods
 
+* setLanguage(languageCode) - to force manually a particular language
+* getLanguage() - to get the current displayed language
+* getInterfaceLanguage() - to get the current device interface language
 
-This is a draft of how the library should work.
+###Other examples
+To force a particular language use something like this:
+```javascript
+  _onSetLanguageToItalian(){
+    strings.setLanguage('it');
+    this.setState({});
+  }
+```
 
 Every suggestion is welcomed.
-

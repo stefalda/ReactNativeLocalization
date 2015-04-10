@@ -8,7 +8,7 @@
  * one if a match is not found).
  *
  * How to use:
- * 1) include the ReactLocalocalization.m and ReactLocalocalization.h in your
+ * 1) include the ReactLocalization.m and ReactLocalization.h in your
  *    XCode project
  * 2) in the React class that you want to localize require the library and define
  *    the strings object passing to the constructor a simple object containing
@@ -31,20 +31,8 @@
  *         choice:"Come scegliere l'uovo"
  *       }
  *    });
- * 3) In the constructor method call the load() function of the strings object
- *    with a callback to be called whenever the current language has been
- *    returned by the OS (if this method wasn't asyncronous we could avoid the
- *    callback and just do everything in the constructor)
  *
- *        constructor(props) {
- *          super(props);
- *          strings.load().then(()=>{
- *           this.setState();
- *           console.log("Strings loaded");
- *         });
- *       }
- *
- * 4) Use the strings object directly in the render method accessing the key
+ * 3) Use the strings object directly in the render method accessing the key
  *    of the localized string
  *
  *       <Text style={styles.title}>
@@ -56,19 +44,9 @@
 
 var Q = require("q");
 var localization = require('NativeModules').ReactLocalization;
-var language;
-
+var interfaceLanguage = localization.language;
 
 class LocalizedStrings{
-  _getLanguage(){
-    var deferred = Q.defer();
-    localization.getLanguage((error, deviceLanguage)=>{
-      var language = deviceLanguage;
-      console.log("Language in js:"+language);
-      deferred.resolve(language);
-    });
-    return deferred.promise;
-  }
 
   _getBestMatchingLanguage(language, props){
     //If an object with the passed language key exists return it
@@ -79,20 +57,19 @@ class LocalizedStrings{
 
 
   constructor(props) {
-    //Get the current language
-    //console.log("LocalizedStrings"+JSON.stringify(props));
+    //Store locally the passed strings
     this.props = props;
+    //Set language to its default value (the interface)
+    this.setLanguage(interfaceLanguage);
   }
 
-
-  load(){
-      var deferred = Q.defer();
-      this._getLanguage().then((language)=>{
-        console.log("Language is "+language);
-        this.$language = language;
+  //Can be used from ouside the class to force a particular language
+  //indipendently from the interface one
+  setLanguage(language){
         //Check if exists a translation for the current language or if the default
         //should be used
         var bestLanguage = this._getBestMatchingLanguage(language, this.props);
+        this.language = bestLanguage;
         //Associate the language object to the this object
         if (this.props[bestLanguage]){
           console.log("There are strings for the language:"+language);
@@ -105,14 +82,33 @@ class LocalizedStrings{
             }
           }
         }
-        //Promise fulfilled
-        deferred.resolve();
-        //Check if the property what exists in this
-        console.log("What = " + this.what);
-      });
-
-      return deferred.promise;
     }
 
+  //The current language displayed (could differ from the interface language
+  // if it has been forced manually and a matching translation has been found)
+  getLanguage(){
+    return this.language;
+  }
+
+  //The current interface language (could differ from the language displayed)
+  getInterfaceLanguage(){
+    return interfaceLanguage;
+  }
+
+  //Can be used to retrieve the interface language
+  //but now it's useless because that value is exposed directly
+  //in a dictionary from the ReactLocalization class
+  //I leave it as an example but it's now deprecated
+  /*
+  _getLanguage(){
+    var deferred = Q.defer();
+    localization.getLanguage((error, deviceLanguage)=>{
+      var language = deviceLanguage;
+      console.log("Language in js:"+language);
+      deferred.resolve(language);
+    });
+    return deferred.promise;
+  }
+  */
 }
 module.exports = LocalizedStrings;
