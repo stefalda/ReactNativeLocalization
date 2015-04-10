@@ -15,14 +15,17 @@ In this implementation we can keep the localized strings in the same file of the
 
   It's possible to force a language different from the interface one.
 
+###Installation
+  1. `npm install react-native-localization`
+  2. In the XCode's "Project navigator", right click on project's name ➜ `Add Files to <...>`
+  3. Go to `node_modules` ➜ `react-native-localization` and add
+      * ReactLocalization.h
+      * ReactLocalization.m
+  4. Build and run
+
 ###How to use:
 
-  1) include in your XCode project
-
-  	 * ReactLocalization.h
-  	 * ReactLocalization.m
-
-  2) in the React class that you want to localize require the library and define
+  1. in the React class that you want to localize require the library and define
      the strings object passing to the constructor a simple object containing
      a language key (i.e. en, it, fr..) and then a list of key-value pairs with
      the needed localized strings
@@ -46,14 +49,14 @@ In this implementation we can keep the localized strings in the same file of the
  });
  ```
 
-  3) Use the strings object directly in the render method accessing the key
+  2. Use the strings object directly in the render method accessing the key
      of the localized string
 
-```javascript
-<Text style={styles.title}>
-  {strings.how}
-</Text>
-```
+  ```javascript
+  <Text style={styles.title}>
+    {strings.how}
+  </Text>
+  ```
 
 ###Other methods
 
@@ -70,4 +73,5 @@ To force a particular language use something like this:
   }
 ```
 
-Every suggestion is welcomed.
+## Questions or suggestions?
+Feel free to contact me in [twitter](https://twitter.com/talpaz) or [create an issue](https://github.com/stefalda/ReactNativeLocalization/issues/new)
