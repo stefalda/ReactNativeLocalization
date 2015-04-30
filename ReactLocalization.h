@@ -25,5 +25,5 @@
 #import "RCTBridgeModule.h"
 #import "RCTLog.h"
 @interface ReactLocalization : NSObject<RCTBridgeModule>
-    -(void)getLanguage:(RCTResponseSenderBlock)callback;
+
 @end

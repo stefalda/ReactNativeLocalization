@@ -28,7 +28,7 @@
 @end
 
 @implementation ReactLocalization
-
+  RCT_EXPORT_MODULE();
 /*
  * Private implementation
  */
@@ -39,8 +39,7 @@
 /*
  * Method called from javascript with a callback in case of success
  */
--(void)getLanguage:(RCTResponseSenderBlock)callback{
-    RCT_EXPORT();
+RCT_EXPORT_METHOD(getLanguage:(RCTResponseSenderBlock)callback){
     NSString * language =  [self getCurrentLanguage];
     NSLog(@"Language: %@", language);
     callback(@[[NSNull null], language]);
