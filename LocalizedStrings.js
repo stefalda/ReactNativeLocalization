@@ -52,7 +52,7 @@ class LocalizedStrings{
     //If an object with the passed language key exists return it
     if (props[language]) return language;
     //Return the default language (the first coded)
-    return props[0]
+    return Object.keys(props)[0];
   }
 
 
@@ -73,7 +73,7 @@ class LocalizedStrings{
         //Associate the language object to the this object
         if (this.props[bestLanguage]){
           //console.log("There are strings for the language:"+language);
-          var localizedStrings = this.props[language];
+          var localizedStrings = this.props[this.language];
           for (var key in localizedStrings){
             //console.log("Checking property:"+key);
             if (localizedStrings.hasOwnProperty(key)) {
