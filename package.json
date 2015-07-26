@@ -1,6 +1,6 @@
 {
   "name": "react-native-localization",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simple module to localize the ReactNative interface",
   "main": "LocalizedStrings.js",
   "scripts": {
@@ -17,8 +17,8 @@
     "localization",
     "internationalization"
   ],
-  "dependencies": {
-    "react-native": "^0.4.0"
+  "peerDependencies": {
+    "react-native": ">=0.5"
   },
   "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
   "license": "MIT",
