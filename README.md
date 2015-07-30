@@ -17,11 +17,11 @@ In this implementation we can keep the localized strings in the same file of the
 
 ###Installation
   1. `npm install react-native-localization`
-  2. In the XCode's "Project navigator", right click on project's name ➜ `Add Files to <...>`
-  3. Go to `node_modules` ➜ `react-native-localization` and add
-      * ReactLocalization.h
-      * ReactLocalization.m
-  4. Build and run
+  2. In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
+  3. Go to `node_modules` ➜ `react-native-localization` and add the project
+      * ReactNativeLocalization.xcodeproj
+  4. Add libReactNativeLocalization.a to Build Phases -> Link Binary With Libraries    
+  5. Build and run
 
 ###How to use:
 
