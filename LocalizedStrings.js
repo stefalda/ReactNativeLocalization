@@ -43,7 +43,7 @@
 'use strict';
 
 //var Q = require("q");
-var localization = require('NativeModules').ReactLocalization;
+var localization = require('react-native').NativeModules.ReactLocalization;
 var interfaceLanguage = localization.language;
 
 class LocalizedStrings{
