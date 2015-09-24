@@ -8,44 +8,13 @@
  * one if a match is not found).
  *
  * How to use:
- * 1) include the ReactLocalization.m and ReactLocalization.h in your
- *    XCode project
- * 2) in the React class that you want to localize require the library and define
- *    the strings object passing to the constructor a simple object containing
- *    a language key (i.e. en, it, fr..) and then a list of key-value pairs with
- *    the needed localized strings
- *
- *    var LocalizedStrings = require('./LocalizedStrings');
- *
- *    var strings = new  LocalizedStrings({
- *       en:{
- *         how:"How do you want your egg today?",
- *         boiledEgg:"Boiled egg",
- *         softBoiledEgg:"Soft-boiled egg",
- *         choice:"How to choose the egg"
- *       },
- *       it:{
- *         how:"Come vuoi il tuo uovo oggi?",
- *         boiledEgg:"Uovo sodo",
- *         softBoiledEgg:"Uovo alla coque",
- *         choice:"Come scegliere l'uovo"
- *       }
- *    });
- *
- * 3) Use the strings object directly in the render method accessing the key
- *    of the localized string
- *
- *       <Text style={styles.title}>
- *             {strings.how}
- *       </Text>
-
+ * Check the instructions at:
+ * https://github.com/stefalda/ReactNativeLocalization
  */
 'use strict';
 
-//var Q = require("q");
 var localization = require('react-native').NativeModules.ReactLocalization;
 var interfaceLanguage = localization.language;
-
 class LocalizedStrings{
 
   _getBestMatchingLanguage(language, props){
@@ -60,6 +29,7 @@ class LocalizedStrings{
     //Return the default language (the first coded)
     return Object.keys(props)[0];
   }
+
 
   constructor(props) {
     //Store locally the passed strings

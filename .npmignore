@@ -1,0 +1,6 @@
+# Android/IJ
+.idea/workspace.xml
+.idea/libraries
+local.properties
+*.iml
+build

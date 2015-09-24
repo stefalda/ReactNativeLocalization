@@ -16,7 +16,7 @@ The Javascript library uses a native library (ReactLocalization) to get the curr
 
 It's possible to force a language different from the interface one.
 
-## Installation
+## Installation iOS
 
 1. `npm install --save react-native-localization`
 2. In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
@@ -24,14 +24,73 @@ It's possible to force a language different from the interface one.
 4. Add libReactNativeLocalization.a to Build Phases -> Link Binary With Libraries
 5. Build and run
 
+##Installation Android
+1. `npm install --save react-native-localization`
+2. In `android/setting.gradle`
+
+```gradle
+...
+include ':ReactNativeLocalization', ':app'
+project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
+```
+
+3. In `android/app/build.gradle`
+
+```gradle
+...
+dependencies {
+    ...
+    compile project(':ReactNativeLocalization')
+}
+```
+
+4. register module (in MainActivity.java)
+
+```java
+import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
+
+public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+  ......
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    mReactRootView = new ReactRootView(this);
+
+    mReactInstanceManager = ReactInstanceManager.builder()
+      .setApplication(getApplication())
+      .setBundleAssetName("index.android.bundle")
+      .setJSMainModuleName("index.android")
+      .addPackage(new MainReactPackage())
+      .addPackage(new ReactNativeLocalizationPackage())              // <------ add here
+      .setUseDeveloperSupport(BuildConfig.DEBUG)
+      .setInitialLifecycleState(LifecycleState.RESUMED)
+      .build();
+
+    mReactRootView.startReactApplication(mReactInstanceManager, "ExampleRN", null);
+
+    setContentView(mReactRootView);
+  }
+
+  ......
+
+}
+```
+
+(Thanks to @rebeccahughes for showing by example how to create an android module for React Native)
+
 ## Usage
 
 In the React class that you want to localize require the library and define the strings object passing to the constructor a simple object containing a language key (i.e. en, it, fr..) and then a list of key-value pairs with the needed localized strings.
 
  ```js
+\\ES6 module syntax 
 import LocalizedStrings from 'react-native-localization';
 
-let localizedStrings = new LocalizedStrings({
+\\CommonJS syntax
+\\let LocalizedStrings  = require ('react-native-localization');
+
+let strings = new LocalizedStrings({
   en:{
     how:"How do you want your egg today?",
     boiledEgg:"Boiled egg",
@@ -47,7 +106,7 @@ let localizedStrings = new LocalizedStrings({
 });
 ```
 
-Then use the `localizedStrings` object literal directly in the render method accessing the key of the localized string.
+Then use the `strings` object literal directly in the render method accessing the key of the localized string.
 
 ```js
 <Text style={styles.title}>
