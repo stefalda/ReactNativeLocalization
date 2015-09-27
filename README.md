@@ -82,7 +82,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
 In the React class that you want to localize require the library and define the strings object passing to the constructor a simple object containing a language key (i.e. en, it, fr..) and then a list of key-value pairs with the needed localized strings.
 
  ```js
-\\ES6 module syntax 
+\\ES6 module syntax
 import LocalizedStrings from 'react-native-localization';
 
 \\CommonJS syntax
@@ -117,6 +117,19 @@ Then use the `strings` object literal directly in the render method accessing th
 * setLanguage(languageCode) - to force manually a particular language
 * getLanguage() - to get the current displayed language
 * getInterfaceLanguage() - to get the current device interface language
+* formatString() - to format the passed string replacing its placeholders with the other arguments strings
+
+```js
+  en:{
+    bread:"bread",
+    butter:"butter",
+    question:"I'd like {0} and {1}, or just {0}"
+  }
+  ...
+  strings.formatString(strings.question, strings.bread, strings.butter)
+```
+**Beware: do not define a string key as formatString!**
+* getAvailableLanguages() - to get an array of the languages passed in the constructor
 
 ## Examples
 To force a particular language use something like this:

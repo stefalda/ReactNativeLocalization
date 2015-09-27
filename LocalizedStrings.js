@@ -70,6 +70,35 @@ class LocalizedStrings{
     return interfaceLanguage;
   }
 
+  //Return an array containing the available languages passed as props in the constructor
+  getAvailableLanguages(){
+    if (!this.availableLanguages){
+      this.availableLanguages = [];
+      for(let language in this.props){
+         this.availableLanguages.push(language);
+      }
+    }
+    return this.availableLanguages;
+  }
+
+  //Format the passed string replacing the numbered placeholders
+  //i.e. I'd like some {0} and {1}, or just {0}
+  //Use example:
+  //  strings.formatString(strings.question, strings.bread, strings.butter)
+  formatString(str, ...values){
+      var res = str;
+      for (let i=0; i<values.length;i++){
+          res = this._replaceAll("{"+i+"}", values[i], res);
+      }
+      return res;
+  }
+
+  //Replace all occorrencies of a string in another using RegExp
+  _replaceAll(find, replace, str) {
+    //Escape find
+    find = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    return str.replace(new RegExp(find, 'g'), replace);
+  }
   //Can be used to retrieve the interface language
   //but now it's useless because that value is exposed directly
   //in a dictionary from the ReactLocalization class
