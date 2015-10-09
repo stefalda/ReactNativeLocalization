@@ -17,9 +17,6 @@
     "localization",
     "internationalization"
   ],
-  "peerDependencies": {
-    "react-native": ">=0.5"
-  },
   "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
   "license": "MIT",
   "bugs": {
