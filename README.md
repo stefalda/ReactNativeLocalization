@@ -1,6 +1,8 @@
 # ReactNativeLocalization
 
-Class to localize the ReactNative interface
+Class to localize the ReactNative interface.
+
+Use [react-localization](https://github.com/stefalda/react-localization) if you want to share code with a React project.
 
 ## What it does
 
