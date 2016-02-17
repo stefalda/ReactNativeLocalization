@@ -30,37 +30,37 @@ It's possible to force a language different from the interface one.
 1. `npm install --save react-native-localization`
 2. In `android/setting.gradle`
 
-```gradle
-...
-include ':ReactNativeLocalization', ':app'
-project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
-```
+    ```gradle
+    ...
+    include ':ReactNativeLocalization', ':app'
+    project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
+    ```
 
 3. In `android/app/build.gradle`
 
-```gradle
-...
-dependencies {
+    ```gradle
     ...
-    compile project(':ReactNativeLocalization')
-}
-```
+    dependencies {
+        ...
+        compile project(':ReactNativeLocalization')
+    }
+    ```
 
 4. register module (in MainActivity.java)
 
-```java
-import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
-
-public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
-  ......
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new ReactNativeLocalizationPackage()); 
+    ```java
+    import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
+    
+    public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+      ......
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+                    new ReactNativeLocalizationPackage()); 
+        }
+      ......
     }
-  ......
-}
-```
+    ```
 
 (Thanks to @rebeccahughes for showing by example how to create an android module for React Native)
 
