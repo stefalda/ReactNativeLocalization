@@ -57,9 +57,20 @@ class LocalizedStrings{
               this[key] = localizedStrings[key];
             }
           }
+          //Now add any string missing from the translation but existing in the default language
+          var defaultLanguage = Object.keys(this.props)[0];
+          if (defaultLanguage!==this.language){
+              localizedStrings = this.props[defaultLanguage];
+              for (var key in localizedStrings){
+                if (localizedStrings.hasOwnProperty(key) && !this[key]) {
+                    this[key] = localizedStrings[key];
+                    console.log("Missing localization for language '"+this.language+"' and key '"+key+"'.")
+                }
+               }
+          }          
         }
     }
-
+    
   //The current language displayed (could differ from the interface language
   // if it has been forced manually and a matching translation has been found)
   getLanguage(){
