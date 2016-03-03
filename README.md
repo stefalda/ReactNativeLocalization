@@ -99,6 +99,8 @@ Then use the `strings` object literal directly in the render method accessing th
 </Text>
 ```
 
+The first language is considered the default one, so if a translation is missing for the selected language, the default one is shown and a line is written to the log as a reminder.
+
 ## API
 
 * setLanguage(languageCode) - to force manually a particular language
