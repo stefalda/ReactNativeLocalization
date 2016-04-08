@@ -61,14 +61,25 @@ class LocalizedStrings{
           var defaultLanguage = Object.keys(this.props)[0];
           if (defaultLanguage!==this.language){
               localizedStrings = this.props[defaultLanguage];
-              for (var key in localizedStrings){
-                if (localizedStrings.hasOwnProperty(key) && !this[key]) {
-                    this[key] = localizedStrings[key];
-                    console.log("Missing localization for language '"+this.language+"' and key '"+key+"'.")
-                }
-               }
-          }          
+              this._fallbackValues(localizedStrings, this);
         }
+    }
+  }
+  
+  //Load fallback values for missing translations 
+    _fallbackValues(defaultStrings, strings){
+    for (var key in defaultStrings){
+        if (defaultStrings.hasOwnProperty(key) && !strings[key]) {
+            strings[key]=defaultStrings[key];
+            console.log("Missing localization for language '"+this.language+"' and key '"+key+"'.");
+        }
+        else {
+        if (typeof strings[key]!="string"){
+            //Si tratta di un oggetto
+            this._fallbackValues(defaultStrings[key], strings[key]);
+        }
+        }
+    }  
     }
     
   //The current language displayed (could differ from the interface language
@@ -105,6 +116,16 @@ class LocalizedStrings{
       return res;
   }
 
+  //Return a string with the passed key in a different language 
+  getString(key, language){
+      try{
+             return this.props[language][key];
+      } catch(ex){
+         console.log("No localization found for key "+ key +" and language " + language); 
+      }
+      return null;
+  }
+  
   //Replace all occorrencies of a string in another using RegExp
   _replaceAll(find, replace, str) {
     //Escape find
