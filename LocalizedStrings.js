@@ -14,7 +14,7 @@
 'use strict';
 
 var localization = require('react-native').NativeModules.ReactLocalization;
-var interfaceLanguage = localization.language;
+var interfaceLanguage = localization.language.replace(/_/g,'-');
 class LocalizedStrings{
 
   _getBestMatchingLanguage(language, props){

@@ -36,7 +36,7 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule{
      */
     private String getCurrentLanguage(){
         Locale current =  getReactApplicationContext().getResources().getConfiguration().locale;
-        return current.getLanguage();
+        return current.toString();
     }
 
     /**
