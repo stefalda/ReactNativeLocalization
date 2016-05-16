@@ -69,11 +69,11 @@ It's possible to force a language different from the interface one.
 In the React class that you want to localize require the library and define the strings object passing to the constructor a simple object containing a language key (i.e. en, it, fr..) and then a list of key-value pairs with the needed localized strings.
 
  ```js
-\\ES6 module syntax
+// ES6 module syntax
 import LocalizedStrings from 'react-native-localization';
 
-\\CommonJS syntax
-\\let LocalizedStrings  = require ('react-native-localization');
+// CommonJS syntax
+// let LocalizedStrings  = require ('react-native-localization');
 
 let strings = new LocalizedStrings({
   en:{
