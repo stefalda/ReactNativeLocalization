@@ -18,7 +18,12 @@ The Javascript library uses a native library (ReactLocalization) to get the curr
 
 It's possible to force a language different from the interface one.
 
-## Installation iOS
+## Installation
+The easiest way to install: use [rnpm](https://github.com/rnpm/rnpm), the react native package manager. (If you don´t have it: install it via `npm install rnpm -g`)
+
+Just run `rnpm install react-native-localization` inside your react-native project folder and you are ready to go. Don´t forget to restart the app / node server or you will see an error.
+
+### Manual installation iOS
 
 1. `npm install --save react-native-localization`
 2. In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
@@ -26,7 +31,7 @@ It's possible to force a language different from the interface one.
 4. Add libReactNativeLocalization.a to Build Phases -> Link Binary With Libraries
 5. Build and run
 
-##Installation Android
+### Manual installation Android
 1. `npm install --save react-native-localization`
 2. In `android/setting.gradle`
 
