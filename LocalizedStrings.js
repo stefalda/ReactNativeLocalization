@@ -127,10 +127,10 @@ class LocalizedStrings{
   }
   
   //Replace all occorrencies of a string in another using RegExp
-  _replaceAll(find, replace, str) {
-    //Escape find
-    find = find.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-    return str.replace(new RegExp(find, 'g'), replace);
+  _replaceAll(original, replacement, str) {
+    original = original.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    replacement = `${replacement}`.replace(/([$])/g, '$$$$');
+    return str.replace(new RegExp(original, 'g'), replacement);
   }
   //Can be used to retrieve the interface language
   //but now it's useless because that value is exposed directly
