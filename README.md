@@ -23,6 +23,8 @@ The easiest way to install: use [rnpm](https://github.com/rnpm/rnpm), the react 
 
 Just run `rnpm install react-native-localization` inside your react-native project folder and you are ready to go. Don´t forget to restart the app / node server or you will see an error.
 
+If your installing for Android you should still manually execute step 4 of "Manual installation Android".
+
 ### Manual installation iOS
 
 1. `npm install --save react-native-localization`
