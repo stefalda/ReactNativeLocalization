@@ -51,17 +51,19 @@ Just run `rnpm install react-native-localization` inside your react-native proje
     }
     ```
 
-4. register module (in MainActivity.java)
+4. register module (in MainApplication.java)
 
     ```java
     import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
     
-    public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
+    public class MainApplication extends Application implements ReactApplication {
       ......
+        @Override
         protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                    new MainReactPackage(),
-                    new ReactNativeLocalizationPackage()); 
+          return Arrays.<ReactPackage>asList(
+              new MainReactPackage(),
+              new ReactNativeLocalizationPackage()
+          );
         }
       ......
     }
