@@ -126,7 +126,7 @@ The first language is considered the default one, so if a translation is missing
   ...
   strings.formatString(strings.question, strings.bread, strings.butter)
 ```
-**Beware: do not define a string key as formatString!**
+**Beware: do not define a string key as `formatString` or `language`!**
 * getAvailableLanguages() - to get an array of the languages passed in the constructor
 
 ## Examples
