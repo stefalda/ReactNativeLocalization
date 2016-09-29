@@ -18,7 +18,14 @@ The Javascript library uses a native library (ReactLocalization) to get the curr
 
 It's possible to force a language different from the interface one.
 
-## Installation iOS
+## Installation
+The easiest way to install: use [rnpm](https://github.com/rnpm/rnpm), the react native package manager. (If you don´t have it: install it via `npm install rnpm -g`)
+
+Just run `rnpm install react-native-localization` inside your react-native project folder and you are ready to go. Don´t forget to restart the app / node server or you will see an error.
+
+If your installing for Android you should still manually execute step 4 of "Manual installation Android".
+
+### Manual installation iOS
 
 1. `npm install --save react-native-localization`
 2. In the XCode's "Project navigator", right click on Libraries folder under your project ➜ `Add Files to <...>`
@@ -26,41 +33,43 @@ It's possible to force a language different from the interface one.
 4. Add libReactNativeLocalization.a to Build Phases -> Link Binary With Libraries
 5. Build and run
 
-##Installation Android
+### Manual installation Android
 1. `npm install --save react-native-localization`
 2. In `android/setting.gradle`
 
-```gradle
-...
-include ':ReactNativeLocalization', ':app'
-project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
-```
+    ```gradle
+    ...
+    include ':ReactNativeLocalization', ':app'
+    project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
+    ```
 
 3. In `android/app/build.gradle`
 
-```gradle
-...
-dependencies {
+    ```gradle
     ...
-    compile project(':ReactNativeLocalization')
-}
-```
-
-4. register module (in MainActivity.java)
-
-```java
-import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
-
-public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
-  ......
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new ReactNativeLocalizationPackage()); 
+    dependencies {
+        ...
+        compile project(':ReactNativeLocalization')
     }
-  ......
-}
-```
+    ```
+
+4. register module (in MainApplication.java)
+
+    ```java
+    import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
+    
+    public class MainApplication extends Application implements ReactApplication {
+      ......
+        @Override
+        protected List<ReactPackage> getPackages() {
+          return Arrays.<ReactPackage>asList(
+              new MainReactPackage(),
+              new ReactNativeLocalizationPackage()
+          );
+        }
+      ......
+    }
+    ```
 
 (Thanks to @rebeccahughes for showing by example how to create an android module for React Native)
 
@@ -69,11 +78,11 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
 In the React class that you want to localize require the library and define the strings object passing to the constructor a simple object containing a language key (i.e. en, it, fr..) and then a list of key-value pairs with the needed localized strings.
 
  ```js
-\\ES6 module syntax
+// ES6 module syntax
 import LocalizedStrings from 'react-native-localization';
 
-\\CommonJS syntax
-\\let LocalizedStrings  = require ('react-native-localization');
+// CommonJS syntax
+// let LocalizedStrings  = require ('react-native-localization');
 
 let strings = new LocalizedStrings({
   en:{
@@ -99,6 +108,8 @@ Then use the `strings` object literal directly in the render method accessing th
 </Text>
 ```
 
+The first language is considered the default one, so if a translation is missing for the selected language, the default one is shown and a line is written to the log as a reminder.
+
 ## API
 
 * setLanguage(languageCode) - to force manually a particular language
@@ -115,7 +126,7 @@ Then use the `strings` object literal directly in the render method accessing th
   ...
   strings.formatString(strings.question, strings.bread, strings.butter)
 ```
-**Beware: do not define a string key as formatString!**
+**Beware: do not define a string key as `formatString` or `language`!**
 * getAvailableLanguages() - to get an array of the languages passed in the constructor
 
 ## Examples

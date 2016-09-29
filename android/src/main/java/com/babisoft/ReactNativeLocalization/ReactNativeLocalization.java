@@ -1,7 +1,5 @@
 package com.babisoft.ReactNativeLocalization;
 
-import android.app.Application;
-
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -14,12 +12,12 @@ import java.util.Map;
 /**
  * Created by stefano on 20/09/15.
  */
-public class ReactNativeLocalization extends ReactContextBaseJavaModule{
+public class ReactNativeLocalization extends ReactContextBaseJavaModule {
 
     /**
      * Name of the exported variable
      */
-    private static final String LANGUAGE =  "language";
+    private static final String LANGUAGE = "language";
 
     public ReactNativeLocalization(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -32,15 +30,17 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule{
 
     /**
      * Return the current language
+     *
      * @return
      */
-    private String getCurrentLanguage(){
-        Locale current =  getReactApplicationContext().getResources().getConfiguration().locale;
-        return current.getLanguage();
+    private String getCurrentLanguage() {
+        Locale current = getReactApplicationContext().getResources().getConfiguration().locale;
+        return current.toString();
     }
 
     /**
      * Export to Javascript the variable language containing the current language
+     *
      * @return
      */
     @Override
@@ -52,12 +52,13 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule{
 
     /**
      * Export a method callable from javascript that returns the current language
+     *
      * @param callback
      */
     @ReactMethod
-    public void getLanguage(Callback callback){
+    public void getLanguage(Callback callback) {
         String language = getCurrentLanguage();
-        System.out.println("The current language is "+language);
+        System.out.println("The current language is " + language);
         callback.invoke(null, language);
     }
 }
