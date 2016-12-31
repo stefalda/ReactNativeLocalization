@@ -30,10 +30,12 @@
 @implementation ReactLocalization
   RCT_EXPORT_MODULE();
 /*
- * Private implementation
+ * Private implementation - return the language and the region like 'en-US'
  */
 -(NSString*) getCurrentLanguage{
-    return [[NSLocale preferredLanguages] objectAtIndex:0];
+    NSLocale* currentLocale = [NSLocale currentLocale];
+    return [NSString stringWithFormat:@"%@-%@", currentLocale.languageCode, currentLocale.countryCode];
+   // return [[NSLocale preferredLanguages] objectAtIndex:0];
 }
 
 /*
