@@ -12,8 +12,12 @@
  * https://github.com/stefalda/ReactNativeLocalization
  */
 'use strict';
+import { NativeModules } from 'react-native';
+var localization = NativeModules.ReactLocalization;
+if (!localization){
+     console.error("Something went wrong initializing the native ReactLocalization module.\nPlease check your configuration.\nDid you run 'react-native link'?");
+}
 
-var localization = require('react-native').NativeModules.ReactLocalization;
 var interfaceLanguage = localization.language.replace(/_/g,'-');
 class LocalizedStrings{
 
