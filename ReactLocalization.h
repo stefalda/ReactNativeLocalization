@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIDevice.h>
 #import "RCTBridgeModule.h"
 #import "RCTLog.h"
 @interface ReactLocalization : NSObject<RCTBridgeModule>
