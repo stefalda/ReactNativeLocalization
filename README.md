@@ -45,8 +45,8 @@ step 4 of "Manual installation Android" has been automatically executed by the l
 
     ```gradle
     ...
-    include ':ReactNativeLocalization', ':app'
-    project(':ReactNativeLocalization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
+    include ':react-native-localization', ':app'
+    project(':react-native-localization').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-localization/android')
     ```
 
 3. In `android/app/build.gradle`
@@ -55,7 +55,7 @@ step 4 of "Manual installation Android" has been automatically executed by the l
     ...
     dependencies {
         ...
-        compile project(':ReactNativeLocalization')
+        compile project(':react-native-localization')
     }
     ```
 
