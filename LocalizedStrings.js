@@ -73,7 +73,7 @@ class LocalizedStrings{
   //Load fallback values for missing translations 
     _fallbackValues(defaultStrings, strings){
     for (var key in defaultStrings){
-      if (defaultStrings.hasOwnProperty(key) && (!strings[key] || (strings.props[strings.language][key] !== strings[key]))) {
+        if (defaultStrings.hasOwnProperty(key) && !strings[key]) {
             strings[key]=defaultStrings[key];
             console.log("Missing localization for language '"+this.language+"' and key '"+key+"'.");
         }
