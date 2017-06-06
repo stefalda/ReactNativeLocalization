@@ -60,7 +60,7 @@ declare module 'react-native-localization' {
         export default class LocalizedStrings<T>  {
             constructor(globalStrings: GlobalStrings<T>);
 
-            [key: string]: string;
+            [key: string]: any;
         }
     }
 
