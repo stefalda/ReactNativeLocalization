@@ -1,5 +1,8 @@
 package com.babisoft.ReactNativeLocalization;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -37,7 +40,7 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule {
 
         // user locale takes precedence
         String userLocale = this.getUserLocale();
-        if (userLocale) {
+        if (userLocale != null) {
             return userLocale;
         }
         
@@ -47,7 +50,7 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule {
 
 
     public String getUserLocale() {
-        return getPreferences().getString("locale_override", null)
+        return getPreferences().getString("locale_override", null);
     }
 
     
