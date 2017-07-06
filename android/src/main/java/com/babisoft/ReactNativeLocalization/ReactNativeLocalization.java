@@ -34,10 +34,23 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule {
      * @return
      */
     private String getCurrentLanguage() {
+
+        // user locale takes precedence
+        String userLocale = this.getUserLocale();
+        if (userLocale) {
+            return userLocale;
+        }
+        
         Locale current = getReactApplicationContext().getResources().getConfiguration().locale;
         return current.getLanguage() + "-" + current.getCountry();
     }
 
+
+    public String getUserLocale() {
+        return getPreferences().getString("locale_override", null)
+    }
+
+    
     /**
      * Export to Javascript the variable language containing the current language
      *
@@ -60,5 +73,15 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule {
         String language = getCurrentLanguage();
         System.out.println("The current language is " + language);
         callback.invoke(null, language);
+    }
+
+    /**
+     * SharedPreferences
+     */
+    private SharedPreferences getPreferences() {
+        return getReactApplicationContext().getSharedPreferences("react-native", Context.MODE_PRIVATE);
+    }
+    private SharedPreferences.Editor getEditor() {
+        return getPreferences().edit();
     }
 }
