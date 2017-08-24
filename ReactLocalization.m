@@ -26,6 +26,7 @@
 
 @interface ReactLocalization ()
 -(NSString*) getCurrentLanguage;
+-(NSString*) getUserLocale;
 @end
 
 @implementation ReactLocalization
@@ -34,12 +35,30 @@
  * Private implementation - return the language and the region like 'en-US' if iOS >= 10 otherwise just the language
  */
 -(NSString*) getCurrentLanguage{
+    // User settings take precedence
+    NSString* userLocale = [self getUserLocale];
+    if (userLocale) {
+        return userLocale;
+    }
+
+    // Device locale
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10")) {
         NSLocale* currentLocale = [NSLocale currentLocale];
         return [NSString stringWithFormat:@"%@-%@", currentLocale.languageCode, currentLocale.countryCode];
     }
     return [[NSLocale preferredLanguages] objectAtIndex:0];
 }
+
+-(NSString*) getUserLocale {
+    NSArray* locales = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
+    if (locales == nil ) { return nil; }
+    if ([locales count] == 0) { return nil; }
+
+    NSString* userLocale = locales[0];
+    return userLocale;
+} 
+
+
 
 /*
  * Method called from javascript with a callback in case of success
