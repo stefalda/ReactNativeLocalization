@@ -122,6 +122,13 @@ Then use the `strings` object literal directly in the render method accessing th
 
 The first language is considered the default one, so if a translation is missing for the selected language, the default one is shown and a line is written to the log as a reminder.
 
+## Typescript
+When using ts you should import the library like this:
+
+```ts
+import LocalizedString = require("react-native-localization");
+```
+
 ## API
 
 * setLanguage(languageCode) - to force manually a particular language
