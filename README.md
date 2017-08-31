@@ -12,6 +12,10 @@ At the beginning I thought I'd expose the native iOS internationalization API (N
 
 In this implementation we can keep the localized strings in the same file of the React View in a similar way of how Styles are implemented (I don't deny that this approach could lead to some duplications in the translated strings, but it could be feasible to create a CommonJS module to use as common source of the strings, requiring it in the different views).
 
+
+**Beware *Expo* created apps need to be ejected before integrating native plugins like this one.**
+
+
 ## How it works
 
 The Javascript library uses a native library (ReactLocalization) to get the current interface language, then it loads and displays the strings matching the current interface locale or the default language (the first one if a match is not found) if a specific localization can't be found.
