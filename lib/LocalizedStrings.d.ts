@@ -4,7 +4,7 @@ declare module 'react-native-localization' {
     //
     // strings.getLanguage()
     //
-    interface LocalizationStringsApi {
+    export interface LocalizationStringsApi {
         getLanguage(): string;
 
         setLanguage(language: string): void;
@@ -41,7 +41,7 @@ declare module 'react-native-localization' {
     //          world: "le monde"
     //      }
     //  }
-    interface GlobalStrings<T> {
+    export interface GlobalStrings<T> {
         [language: string]: T;
     }
 
@@ -56,5 +56,5 @@ declare module 'react-native-localization' {
         new<T>(globalStrings: GlobalStrings<T>): LocalizationStringsApi & T;
     }
     const LocalizedStrings: ILocalizedStrings;
-    export = LocalizedStrings;
+    export default LocalizedStrings;
 }
