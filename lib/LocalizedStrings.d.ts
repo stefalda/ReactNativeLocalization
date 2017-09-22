@@ -28,6 +28,25 @@ interface LocalizedStringsFactory {
     LocalizedStringsMethods
 }
 
+//
+//  const strings = LocalizedStrings({
+//      "en": {
+//          hello: "Hello",
+//          world: "World"
+//      },
+//      "fr": {
+//          hello: "Bonjour",
+//          world: "le monde"
+//      }
+//  })
+//
+// strings.getLanguage() // en
+// strings.hello // "Hello"
+// strings.world // "World"
+// strings.setLanguage('fr')
+// strings.hello // "Bonjour"
+// strings.world // "le monde"
+//
 declare const LocalizedStrings: LocalizedStringsFactory
 
 export default LocalizedStrings

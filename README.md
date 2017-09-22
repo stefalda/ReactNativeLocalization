@@ -127,10 +127,25 @@ Then use the `strings` object literal directly in the render method accessing th
 The first language is considered the default one, so if a translation is missing for the selected language, the default one is shown and a line is written to the log as a reminder.
 
 ## Typescript
-When using ts you should import the library like this:
+For TypeScript, your `tsconfig.json` should be something like this:
+```json
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "jsx": "react-native",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true
+    }
+}
+```
+
+Where `"module": "es2015"` is the most important setting for being able to import the module properly.
+
+Import should be done like this:
 
 ```ts
-import LocalizedString = require("react-native-localization");
+import LocalizedString from "react-native-localization";
 ```
 
 ## API
