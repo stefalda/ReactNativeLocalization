@@ -1,60 +1,52 @@
-declare module 'react-native-localization' {
-    //
-    // var strings = LocalizedStrings({ "en": { "Hello": "Hello" }})
-    //
-    // strings.getLanguage()
-    //
-    export interface LocalizationStringsApi {
-        getLanguage(): string;
+export type NamedLocalization<L> = { [P in keyof L]: string }
 
-        setLanguage(language: string): void;
-
-        getInterfaceLanguage(): string;
-
-        getAvailableLanguages(): string[];
-
-        formatString(str: string, ...values: string[]): string;
-
-        getString(key: string, language: string): string;
-    }
-
-    // Define input strings:
-    //
-    //  for example:
-    //
-    //  import LocalizedStrings, {LocalizationStringsApi, GlobalStrings} from 'react-native-localization'
-    //
-    //  interface MyStrings {
-    //      hello: string;
-    //      world: string;
-    //  }
-    //
-    //  The strings in English and french
-    //
-    //  const myGlobalStrings: GlobalStrings<MyStrings> = {
-    //      "en": {
-    //          hello: "Hello",
-    //          world: "World"
-    //      },
-    //      "fr": {
-    //          hello: "Bonjour",
-    //          world: "le monde"
-    //      }
-    //  }
-    export interface GlobalStrings<T> {
-        [language: string]: T;
-    }
-
-    // To get a localized version
-    //
-    // export default new LocalizedStrings(myGlobalStrings) as any as LocalizationStringsApi & MyStrings
-    //
-    // The reason for the above kludge is the fact that the exported strings is a type that is both
-    // my strings in adition to the functions exposed by the localizedStrings class
-    //
-    interface ILocalizedStrings {
-        new<T>(globalStrings: GlobalStrings<T>): LocalizationStringsApi & T;
-    }
-    const LocalizedStrings: ILocalizedStrings;
-    export default LocalizedStrings;
+export type Localizations<L extends NamedLocalization<L>> = {
+  [langKey: string]: L
 }
+type LocalizedStringsMethods = {
+  //Can be used from ouside the class to force a particular language
+  //indipendently from the interface one
+  setLanguage(language: string): void
+  //The current language displayed (could differ from the interface language
+  // if it has been forced manually and a matching translation has been found)
+  getLanguage(): string
+  //The current interface language (could differ from the language displayed)
+  getInterfaceLanguage(): string
+  //Return an array containing the available languages passed as props in the constructor
+  getAvailableLanguages(): string[]
+  //Format the passed string replacing the numbered placeholders
+  //i.e. I'd like some {0} and {1}, or just {0}
+  //Use example:
+  //  strings.formatString(strings.question, strings.bread, strings.butter)
+  formatString(str: string, ...values: any[]): string
+  //Return a string with the passed key in a different language
+  getString(key: string, language: string): string | null
+}
+
+interface LocalizedStringsFactory {
+  new <L extends NamedLocalization<L>>(localizations: Localizations<L>): L &
+    LocalizedStringsMethods
+}
+
+//
+//  const strings = LocalizedStrings({
+//      "en": {
+//          hello: "Hello",
+//          world: "World"
+//      },
+//      "fr": {
+//          hello: "Bonjour",
+//          world: "le monde"
+//      }
+//  })
+//
+// strings.getLanguage() // en
+// strings.hello // "Hello"
+// strings.world // "World"
+// strings.setLanguage('fr')
+// strings.hello // "Bonjour"
+// strings.world // "le monde"
+//
+declare const LocalizedStrings: LocalizedStringsFactory
+
+export default LocalizedStrings
