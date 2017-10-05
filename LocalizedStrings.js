@@ -43,6 +43,13 @@ class LocalizedStrings {
         this.setLanguage(interfaceLanguage);
     }
 
+    //Overwrite content, use for e.g. dynamicly reload locale from server
+    setContent(props){
+        this.props = props;
+        //Set language to its default value (the interface)
+        this.setLanguage(this.language);
+    }
+
     //Can be used from ouside the class to force a particular language
     //indipendently from the interface one
     setLanguage(language) {
@@ -91,6 +98,11 @@ class LocalizedStrings {
     //The current interface language (could differ from the language displayed)
     getInterfaceLanguage() {
         return interfaceLanguage;
+    }
+
+    //The current props (locale object)
+    getLocaleObject() {
+        return this.props;
     }
 
     //Return an array containing the available languages passed as props in the constructor
