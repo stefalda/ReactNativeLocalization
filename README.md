@@ -14,7 +14,7 @@ In this implementation we can keep the localized strings in the same file of the
 
 
 **Beware *Expo* created apps need to be ejected before integrating native plugins like this one.**
-
+**So if you've used the Create React Native app shortcut you should eject the app as detailed here here.**
 
 ## How it works
 
