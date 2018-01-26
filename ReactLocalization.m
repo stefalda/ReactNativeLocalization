@@ -76,4 +76,9 @@ RCT_EXPORT_METHOD(getLanguage:(RCTResponseSenderBlock)callback){
 {
     return @{ @"language": [self getCurrentLanguage]};
 }
+
++(BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
 @end
