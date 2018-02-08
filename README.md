@@ -35,6 +35,8 @@ Don´t forget to restart the app / node server or you will see an error.
 If you're installing for Android and still experiencing problems check if 
 step 4 of "Manual installation Android" has been automatically executed by the linker.
 
+Windows platform doesn't support automatic installation by linker. Only manual installation is supported.
+
 ### Manual installation iOS
 
 1. `npm install --save react-native-localization`
@@ -82,6 +84,21 @@ step 4 of "Manual installation Android" has been automatically executed by the l
     ```
 
 (Thanks to @rebeccahughes for showing by example how to create an android module for React Native)
+
+### Manual installation windows
+
+Full process is documented in official [React Native plugin for Universal Windows](https://github.com/Microsoft/react-native-windows/blob/master/docs/LinkingLibrariesWindows.md) repo: https://github.com/Microsoft/react-native-windows/blob/master/docs/LinkingLibrariesWindows.md
+
+1. Run `npm install --save react-native-localization`
+2. Open your Visual Studio solution.
+3. Right-click the solution in the Solution Explorer
+4. Select Add -> Existing Project
+5. Choose the `.csproj` of the dependency from the Explorer window. Dependency will be in `node_modules\react-native-localization\windows\ReactNativeLocalization`
+6. Right-click the Universal Windows App project in the Solution Explorer
+7. Select Add -> Reference
+8. Choose the `ReactNativeLocalization` project.
+9. Open MainPage.cs
+10. Add the `new ReactNativeLocalization.RNLocalizationPackage()` to the `Packages` list in MainPage.cs
 
 ## Usage
 
