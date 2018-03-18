@@ -2,7 +2,14 @@
 
 Class to localize the ReactNative interface.
 
-Use [react-localization](https://github.com/stefalda/react-localization) if you want to share code with a React project.
+Use [react-localization](https://github.com/stefalda/react-localization) if you want to share code with a React project or the [localized-strings] (https://github.com/stefalda/localized-strings) for a generic javascript solution.
+
+### Note about version 1.x
+ This library has been refactored to use the newly created [localized-strings package](https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to mantain
+
+ All the basic code is now in the localized-strings project and in the react-localization version that adds support for embedding JSX code in the formatted strings, by overriding the formatString method.
+
+ This version adds a custom version of the `getInterfaceLanguage` to retrieve the interface language from the native OS.
 
 ## What it does
 

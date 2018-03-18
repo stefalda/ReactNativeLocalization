@@ -2,10 +2,11 @@
   "name": "react-native-localization",
   "version": "0.2.3",
   "description": "Simple module to localize the ReactNative interface",
-  "main": "LocalizedStrings.js",
+  "main": "./lib/LocalizedStrings.js",
   "types": "./lib/LocalizedStrings.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir lib"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,13 @@
   "bugs": {
     "url": "https://github.com/stefalda/ReactNativeLocalization/issues"
   },
-  "homepage": "https://github.com/stefalda/ReactNativeLocalization"
+  "homepage": "https://github.com/stefalda/ReactNativeLocalization",
+  "dependencies": {
+    "react-localization": "^1.0.3",
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
 }

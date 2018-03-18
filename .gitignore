@@ -6,3 +6,4 @@ npm-instructions.txt
 local.properties
 *.iml
 build
+node_modules
