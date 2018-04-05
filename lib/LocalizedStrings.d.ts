@@ -31,7 +31,7 @@ declare module 'react-native-localization' {
      * Use example:
      *   strings.formatString(strings.question, strings.bread, strings.butter)
      */
-    formatString<T extends Formatted>(str: string, ...values: Array<T | FormatObject<T>>): Array<string | T>;
+    formatString<T extends Formatted>(str: string, ...values: Array<T | FormatObject<T>>): Array<string | T> | string;
     
     /**
      * Return an array containing the available languages passed as props in the constructor
