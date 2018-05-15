@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/stefalda/ReactNativeLocalization",
   "dependencies": {
-    "react-localization": "^1.0.8",
+    "react-localization": "^1.0.9",
     "react": "^16.0.0"
   },
   "devDependencies": {
