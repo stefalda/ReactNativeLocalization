@@ -10,6 +10,8 @@ Use [react-localization](https://github.com/stefalda/react-localization) if you 
  All the basic code is now in the localized-strings project and in the react-localization version that adds support for embedding JSX code in the formatted strings, by overriding the formatString method.
 
  This version adds a custom version of the `getInterfaceLanguage` to retrieve the interface language from the native OS.
+ 
+ **To simplify Android versions' configuration, versions 1.0.11 and up are compatible only with ReactNative >= 0.56.0**
 
 ## What it does
 
