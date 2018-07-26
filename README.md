@@ -11,7 +11,7 @@ Use [react-localization](https://github.com/stefalda/react-localization) if you 
 
  This version adds a custom version of the `getInterfaceLanguage` to retrieve the interface language from the native OS.
  
- **To simplify Android versions' configuration, versions 1.0.11 and up are compatible only with ReactNative >= 0.56.0**
+ **To simplify Android versions' configuration, versions 2.0 and up are compatible only with ReactNative >= 0.56.0**
 
 ## What it does
 
