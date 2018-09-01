@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'React'
 
-  s.preserve_paths      = 'CHANGELOG.md', 'LICENSE', 'package.json', 'LocalizedStrings.js'
-  s.source_files        = '**/*.{h,m}'
+  s.preserve_paths      = 'CHANGELOG.md', 'LICENSE', 'package.json'
+  s.source_files        = '**/*.{h,m}', 'lib/LocalizedStrings.js'
   s.exclude_files       = 'android/**/*'
 end
