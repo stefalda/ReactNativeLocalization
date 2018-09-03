@@ -36,7 +36,7 @@ The easiest way to install is to type just 2 commands inside your react-native p
 
 ```
 npm install react-native-localization --save
-react-native link
+react-native link react-native-localization
 ```
 
 Don´t forget to restart the app / node server or you will see an error.
