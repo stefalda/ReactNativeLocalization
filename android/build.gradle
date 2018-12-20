@@ -15,4 +15,4 @@ android {
     }
 }
 
-dependencies { compile 'com.facebook.react:react-native:+' }
+dependencies { implementation 'com.facebook.react:react-native:+' }
