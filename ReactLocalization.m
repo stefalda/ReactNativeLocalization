@@ -22,7 +22,6 @@
 // SOFTWARE.
 
 #import "ReactLocalization.h"
-#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface ReactLocalization ()
 -(NSString*) getCurrentLanguage;
@@ -35,17 +34,19 @@
  * Private implementation - return the language and the region like 'en-US' if iOS >= 10 otherwise just the language
  */
 -(NSString*) getCurrentLanguage{
-    // User settings take precedence
-    NSString* userLocale = [self getUserLocale];
-    if (userLocale) {
-        return userLocale;
+    if (@available(iOS 10.0, *)) {
+        // Device locale
+        NSString *currentLocale = [[NSLocale currentLocale] localeIdentifier];
+        return currentLocale;
+    } else {
+        // User settings take precedence
+        NSString *userLocale = [self getUserLocale];
+        if (userLocale) {
+            return userLocale;
+        }
     }
-
-    // Device locale
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10")) {
-        NSLocale* currentLocale = [NSLocale currentLocale];
-        return [NSString stringWithFormat:@"%@-%@", currentLocale.languageCode, currentLocale.countryCode];
-    }
+    
+    // Fallback
     return [[NSLocale preferredLanguages] objectAtIndex:0];
 }
 
