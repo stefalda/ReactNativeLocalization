@@ -34,12 +34,7 @@
  * Private implementation - return the language and the region like 'en-US' if iOS >= 10 otherwise just the language
  */
 -(NSString*) getCurrentLanguage{
-    if (@available(iOS 10.0, *)) {
-        // Device locale
-        NSString *currentLocale = [[NSLocale currentLocale] localeIdentifier];
-        return currentLocale;
-    } else {
-        // User settings take precedence
+    if (!@available(iOS 10.0, *)) {
         NSString *userLocale = [self getUserLocale];
         if (userLocale) {
             return userLocale;
