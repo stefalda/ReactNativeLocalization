@@ -35,14 +35,22 @@ It's possible to force a language different from the interface one.
 The easiest way to install is to type just 2 commands inside your react-native project folder and you are ready to go: 
 
 ```
-npm install react-native-localization --save
+yarn add react-native-localization --save
+
+#react-native >= 0.60
+cd ios && pod install && cd ..
+
+#react-native < 0.60
 react-native link react-native-localization
 ```
+
 
 Don´t forget to restart the app / node server or you will see an error.
 
 If you're installing for Android and still experiencing problems check if 
 step 4 of "Manual installation Android" has been automatically executed by the linker.
+
+Check this [article](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) about the new linking behaviour in react-native since version 0.60.
 
 Windows platform doesn't support automatic installation by linker. Only manual installation is supported.
 
