@@ -178,7 +178,7 @@ strings.setContent({
 You can also only overwrite a specific language using
 
 ```js
-strings.setContent(Object.assign({},strings.getLocaleObject(),
+strings.setContent(Object.assign({},strings.getContent(),
 {
   en:{
     how:"How do you want your egg todajsie?",
