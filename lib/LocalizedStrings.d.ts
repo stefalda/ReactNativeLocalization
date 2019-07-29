@@ -43,7 +43,8 @@ declare module 'react-native-localization' {
      * @param key 
      * @param language 
      */
-    getString(key: string, language: string): string;
+    getString(key: string, language?: string): string;
+
     
     /**
      * Replace the NamedLocalization object without reinstantiating the object
