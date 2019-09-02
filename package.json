@@ -1,6 +1,6 @@
 {
   "name": "react-native-localization",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Simple module to localize the ReactNative interface",
   "main": "./lib/LocalizedStrings.js",
   "types": "./lib/LocalizedStrings.d.ts",
