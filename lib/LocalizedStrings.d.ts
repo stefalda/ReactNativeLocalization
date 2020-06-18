@@ -8,8 +8,8 @@ declare module 'react-native-localization' {
 
   export interface LocalizedStringsMethods {
     /**
-     * Can be used from ouside the class to force a particular language
-     * indipendently from the interface one
+     * Can be used from outside the class to force a particular language
+     * independently from the interface one
      * @param language 
      */
     setLanguage(language: string): void;
