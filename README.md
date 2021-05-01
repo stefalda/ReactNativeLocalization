@@ -35,7 +35,11 @@ It's possible to force a language different from the interface one.
 The easiest way to install is to type just 2 commands inside your react-native project folder and you are ready to go: 
 
 ```
-yarn add react-native-localization
+yarn add react-native-localization 
+
+or
+
+npm i react-native-localization
 
 #react-native >= 0.60
 cd ios && pod install && cd ..
