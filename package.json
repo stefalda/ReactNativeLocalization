@@ -39,5 +39,10 @@
   "peerDependencies": {
     "react-native": ">0.64",
     "react-native-windows": ">0.64"
+  },
+  "peerDependenciesMeta": {
+    "react-native-windows": {
+      "optional": true
+    }
   }
 }
