@@ -38,6 +38,7 @@
   },
   "peerDependencies": {
     "react-native": ">0.64",
-    "react-native-windows": ">0.64"
+    "react-native-windows": ">0.64",
+    "react": ">15.6.0"
   }
 }
