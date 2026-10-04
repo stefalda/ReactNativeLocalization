@@ -1,11 +1,41 @@
-npm-instructions.txt
-# Android/IJ
-.idea/workspace.xml
-.idea/libraries
-.gradle
+# Dependencies
+node_modules/
+
+# Build output
+lib/
+build/
+*.tgz
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# Tests / coverage
+coverage/
+
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+
+# Android / IntelliJ
+.idea/
+.gradle/
 local.properties
 *.iml
-build
-node_modules
+android/.gradle/
+android/.idea/
+android/local.properties
+
+# Windows
+*.suo
+*.user
+bin/
+obj/
+
+# Misc
 npm-instructions.txt
-.idea

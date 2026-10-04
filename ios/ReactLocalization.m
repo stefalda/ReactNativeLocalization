@@ -24,57 +24,40 @@
 #import "ReactLocalization.h"
 
 @interface ReactLocalization ()
--(NSString*) getCurrentLanguage;
--(NSString*) getUserLocale;
+- (NSString *)getCurrentLanguage;
 @end
 
 @implementation ReactLocalization
-  RCT_EXPORT_MODULE();
+
+RCT_EXPORT_MODULE();
+
 /*
- * Private implementation - return the language and the region like 'en-US' if iOS >= 10 otherwise just the language
+ * Return the language and region in the "en-US" form expected by the JS layer.
  */
--(NSString*) getCurrentLanguage{
-    if (!@available(iOS 10.0, *)) {
-        NSString *userLocale = [self getUserLocale];
-        if (userLocale) {
-            return userLocale;
-        }
+- (NSString *)getCurrentLanguage {
+    NSString *language = [[NSLocale preferredLanguages] firstObject];
+    if (language == nil || language.length == 0) {
+        return @"en";
     }
-    
-    // Fallback
-    return [[NSLocale preferredLanguages] objectAtIndex:0];
+    return language;
 }
-
--(NSString*) getUserLocale {
-    NSArray* locales = [[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"];
-    if (locales == nil ) { return nil; }
-    if ([locales count] == 0) { return nil; }
-
-    NSString* userLocale = locales[0];
-    return userLocale;
-} 
-
-
 
 /*
  * Method called from javascript with a callback in case of success
  */
-RCT_EXPORT_METHOD(getLanguage:(RCTResponseSenderBlock)callback){
-    NSString * language =  [self getCurrentLanguage];
-    NSLog(@"Language: %@", language);
-    callback(@[[NSNull null], language]);
+RCT_EXPORT_METHOD(getLanguage:(RCTResponseSenderBlock)callback) {
+    callback(@[[NSNull null], [self getCurrentLanguage]]);
 }
 
 /*
  * Expose the language directly to javascript avoiding the callback
  */
-- (NSDictionary *)constantsToExport
-{
-    return @{ @"language": [self getCurrentLanguage]};
+- (NSDictionary *)constantsToExport {
+    return @{ @"language": [self getCurrentLanguage] };
 }
 
-+(BOOL)requiresMainQueueSetup
-{
++ (BOOL)requiresMainQueueSetup {
     return YES;
 }
+
 @end

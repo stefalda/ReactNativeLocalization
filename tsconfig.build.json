@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "lib/commonjs",
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "lib/typescript",
+    "sourceMap": true,
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "verbatimModuleSyntax": false
+  },
+  "include": ["src"]
+}

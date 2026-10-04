@@ -1,26 +1,28 @@
 apply plugin: 'com.android.library'
-def DEFAULT_COMPILE_SDK_VERSION             = 26
-def DEFAULT_BUILD_TOOLS_VERSION             = "26.0.3"
-def DEFAULT_MIN_SDK_VERSION                 = 16
-def DEFAULT_TARGET_SDK_VERSION              = 26
 
 def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
+def DEFAULT_COMPILE_SDK_VERSION = 35
+def DEFAULT_MIN_SDK_VERSION = 24
+def DEFAULT_TARGET_SDK_VERSION = 35
+
 android {
-    compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
-    buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
+    namespace "com.babisoft.ReactNativeLocalization"
+    compileSdk safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
 
     defaultConfig {
-        minSdkVersion safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
-        targetSdkVersion safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
-        versionCode 1
-        versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
+        minSdk safeExtGet('minSdkVersion', DEFAULT_MIN_SDK_VERSION)
+        targetSdk safeExtGet('targetSdkVersion', DEFAULT_TARGET_SDK_VERSION)
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
-dependencies { implementation 'com.facebook.react:react-native:+' }
+dependencies {
+    implementation 'com.facebook.react:react-android'
+}

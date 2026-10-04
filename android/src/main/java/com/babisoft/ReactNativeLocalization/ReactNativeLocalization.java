@@ -32,32 +32,34 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule {
     }
 
     /**
-     * Return the current language
-     *
-     * @return
+     * Return the current language, preferring the value forced by the user and
+     * falling back to the device locale.
      */
     private String getCurrentLanguage() {
-
-        // user locale takes precedence
-        String userLocale = this.getUserLocale();
+        String userLocale = getUserLocale();
         if (userLocale != null) {
             return userLocale;
         }
-        
-        Locale current = getReactApplicationContext().getResources().getConfiguration().locale;
-        return current.getLanguage() + "-" + current.getCountry();
-    }
 
+        Locale current = getReactApplicationContext()
+                .getResources()
+                .getConfiguration()
+                .getLocales()
+                .get(0);
+
+        String country = current.getCountry();
+        if (country == null || country.isEmpty()) {
+            return current.getLanguage();
+        }
+        return current.getLanguage() + "-" + country;
+    }
 
     public String getUserLocale() {
         return getPreferences().getString("locale_override", null);
     }
 
-    
     /**
      * Export to Javascript the variable language containing the current language
-     *
-     * @return
      */
     @Override
     public Map<String, Object> getConstants() {
@@ -68,23 +70,17 @@ public class ReactNativeLocalization extends ReactContextBaseJavaModule {
 
     /**
      * Export a method callable from javascript that returns the current language
-     *
-     * @param callback
      */
     @ReactMethod
     public void getLanguage(Callback callback) {
-        String language = getCurrentLanguage();
-        System.out.println("The current language is " + language);
-        callback.invoke(null, language);
+        callback.invoke(null, getCurrentLanguage());
     }
 
     /**
      * SharedPreferences
      */
     private SharedPreferences getPreferences() {
-        return getReactApplicationContext().getSharedPreferences("react-native", Context.MODE_PRIVATE);
-    }
-    private SharedPreferences.Editor getEditor() {
-        return getPreferences().edit();
+        return getReactApplicationContext()
+                .getSharedPreferences("react-native", Context.MODE_PRIVATE);
     }
 }

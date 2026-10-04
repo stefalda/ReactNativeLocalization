@@ -1,17 +1,29 @@
 # ReactNativeLocalization
 
-Class to localize the ReactNative interface.
+Class to localize the React Native interface.
 
-Use [react-localization](https://github.com/stefalda/react-localization) if you want to share code with a React project or the [localized-strings](https://github.com/stefalda/localized-strings) for a generic javascript solution.
+Use [react-localization](https://github.com/stefalda/react-localization) if you want to share code with a React project or [localized-strings](https://github.com/stefalda/localized-strings) for a generic javascript solution.
+
+### Note about version 3.x
+
+Version 3.x modernizes the library and is aligned with the current React Native ecosystem:
+
+- Written in **TypeScript** with bundled type declarations.
+- Built on top of **`react-localization` 2.x** / `localized-strings` 2.x.
+- Requires **React 19+** (a `react-localization` 2.x requirement) and **React Native 0.73+**.
+- Ships CommonJS, ESM and TypeScript builds through a proper `exports` map.
+- Works with the New Architecture through the legacy native module interop layer.
+- The native modules are resolved automatically via **autolinking**; the legacy `react-native link` step is no longer needed.
+
+See the [CHANGELOG](./CHANGELOG.md) for the full list of changes.
 
 ### Note about version 1.x
- This library has been refactored to use the newly created [localized-strings package](https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to mantain
 
- All the basic code is now in the localized-strings project and in the react-localization version that adds support for embedding JSX code in the formatted strings, by overriding the formatString method.
+This library has been refactored to use the [localized-strings package](https://github.com/stefalda/localized-strings), now added as a dependency, so to unify the code and make it easier to maintain.
 
- This version adds a custom version of the `getInterfaceLanguage` to retrieve the interface language from the native OS.
- 
- **To simplify Android versions' configuration, versions 2.0 and up are compatible only with ReactNative >= 0.56.0**
+All the basic code is now in the localized-strings project and in the react-localization version that adds support for embedding JSX code in the formatted strings, by overriding the `formatString` method.
+
+This version adds a custom version of the `getInterfaceLanguage` to retrieve the interface language from the native OS.
 
 ## What it does
 
@@ -21,42 +33,39 @@ At the beginning I thought I'd expose the native iOS internationalization API (N
 
 In this implementation we can keep the localized strings in the same file of the React View in a similar way of how Styles are implemented (I don't deny that this approach could lead to some duplications in the translated strings, but it could be feasible to create a CommonJS module to use as common source of the strings, requiring it in the different views).
 
-
-**Beware *Expo* created apps need to be ejected before integrating native plugins like this one.**
-**So if you've used the Create React Native app shortcut you should eject the app as detailed here here.**
+**Beware: Expo Go / managed Expo apps need a development build (or need to be ejected) before integrating native modules like this one.**
 
 ## How it works
 
-The Javascript library uses a native library (ReactLocalization) to get the current interface language, then it loads and displays the strings matching the current interface locale or the default language (the first one if a match is not found) if a specific localization can't be found.
+The Javascript library uses a native module (ReactLocalization) to get the current interface language, then it loads and displays the strings matching the current interface locale or the default language (the first one if a match is not found) if a specific localization can't be found.
 
 It's possible to force a language different from the interface one.
 
+## Requirements
+
+- React Native `>= 0.73.0`
+- React `>= 19.0.0`
+- iOS `>= 13.0`, Android `minSdkVersion >= 24`
+- Node.js `>= 20.19.0` for building the library from source
+
 ## Installation
-The easiest way to install is to type just 2 commands inside your react-native project folder and you are ready to go: 
 
-```
-yarn add react-native-localization 
+The easiest way to install is to type just a couple of commands inside your React Native project folder:
 
-or
+```sh
+yarn add react-native-localization
+
+# or
 
 npm i react-native-localization
 
-#react-native >= 0.60
+# iOS only (React Native >= 0.60 uses autolinking)
 cd ios && pod install && cd ..
-
-#react-native < 0.60
-react-native link react-native-localization
 ```
 
+Android and iOS are linked automatically through [autolinking](https://github.com/react-native-community/cli/blob/main/docs/autolinking.md) (React Native >= 0.60). Don't forget to restart the app / bundler after installing.
 
-Don´t forget to restart the app / node server or you will see an error.
-
-If you're installing for Android and still experiencing problems check if 
-step 4 of "Manual installation Android" has been automatically executed by the linker.
-
-Check this [article](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md) about the new linking behaviour in react-native since version 0.60.
-
-Windows platform doesn't support automatic installation by linker. Only manual installation is supported.
+Windows does not support autolinking, so it requires a manual installation (see below).
 
 ### Manual installation iOS
 
@@ -67,8 +76,9 @@ Windows platform doesn't support automatic installation by linker. Only manual i
 5. Build and run
 
 ### Manual installation Android
+
 1. `npm install --save react-native-localization`
-2. In `android/setting.gradle`
+2. In `android/settings.gradle`
 
     ```gradle
     ...
@@ -82,7 +92,7 @@ Windows platform doesn't support automatic installation by linker. Only manual i
     ...
     dependencies {
         ...
-        compile project(':react-native-localization')
+        implementation project(':react-native-localization')
     }
     ```
 
@@ -90,7 +100,7 @@ Windows platform doesn't support automatic installation by linker. Only manual i
 
     ```java
     import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage; // <--- import
-    
+
     public class MainApplication extends Application implements ReactApplication {
       ......
         @Override
@@ -108,7 +118,7 @@ Windows platform doesn't support automatic installation by linker. Only manual i
 
 ### Manual installation windows
 
-Full process is documented in official [React Native plugin for Universal Windows](https://github.com/Microsoft/react-native-windows/blob/master/docs/LinkingLibrariesWindows.md) repo: https://github.com/Microsoft/react-native-windows/blob/master/docs/LinkingLibrariesWindows.md
+Full process is documented in the official [React Native plugin for Universal Windows](https://github.com/Microsoft/react-native-windows/blob/master/docs/LinkingLibrariesWindows.md) repo.
 
 1. Run `npm install --save react-native-localization`
 2. Open your Visual Studio solution.
@@ -125,12 +135,12 @@ Full process is documented in official [React Native plugin for Universal Window
 
 In the React class that you want to localize require the library and define the strings object passing to the constructor a simple object containing a language key (i.e. en, it, fr..) and then a list of key-value pairs with the needed localized strings.
 
- ```js
+```js
 // ES6 module syntax
 import LocalizedStrings from 'react-native-localization';
 
 // CommonJS syntax
-// let LocalizedStrings  = require ('react-native-localization');
+// const LocalizedStrings = require('react-native-localization').default;
 
 let strings = new LocalizedStrings({
   "en-US":{
@@ -182,8 +192,7 @@ strings.setContent({
 You can also only overwrite a specific language using
 
 ```js
-strings.setContent(Object.assign({},strings.getContent(),
-{
+strings.setContent(Object.assign({}, strings.getContent(), {
   en:{
     how:"How do you want your egg todajsie?",
     boiledEgg:"Boiled eggsie",
@@ -194,25 +203,33 @@ strings.setContent(Object.assign({},strings.getContent(),
 ```
 
 ## Typescript
-For TypeScript, your `tsconfig.json` should be something like this:
+
+Types are bundled with the package, so no extra `@types` package is required. A typical `tsconfig.json` looks like this:
+
 ```json
 {
-    "compilerOptions": {
-        "target": "es2015",
-        "module": "es2015",
-        "jsx": "react-native",
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true
-    }
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true
+  }
 }
 ```
-
-Where `"module": "es2015"` is the most important setting for being able to import the module properly.
 
 Import should be done like this:
 
 ```ts
-import LocalizedString from "react-native-localization";
+import LocalizedStrings from 'react-native-localization';
+
+const strings = new LocalizedStrings({
+  en: { how: "How do you want your egg today?" },
+  it: { how: "Come vuoi il tuo uovo oggi?" },
+});
+
+// `strings.how` is fully typed
 ```
 
 ## API
@@ -233,6 +250,9 @@ import LocalizedString from "react-native-localization";
 ```
 **Beware: do not define a string key as `formatString` or `language`!**
 * getAvailableLanguages() - to get an array of the languages passed in the constructor
+* getString(key, language?) - to get a string for a specific language
+* getContent() - to get the whole content object (all the languages/strings)
+* setContent(content) - to replace the content object without reinstantiating
 
 ## Examples
 To force a particular language use something like this:
